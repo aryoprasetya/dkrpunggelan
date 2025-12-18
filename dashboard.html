@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Dashboard DKR Punggelan</title>
+  <link rel="icon" href="assets/images/logodkr.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <style>
+    :root{
+      --wosm-purple:#5b2c83;
+      --wosm-purple-light:#6f3aa6;
+      --bg:#f4f4f9;
+      --radius:12px;
+    }
+    *{box-sizing:border-box;font-family:'Montserrat',sans-serif;}
+    body{margin:0;background:var(--bg);}
+    header{background:var(--wosm-purple);color:#fff;padding:20px;text-align:center;position:relative;}
+    header h1{margin:0;font-weight:400;}
+    .logout{position:absolute;top:20px;right:20px;background:#fff;color:var(--wosm-purple);border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;}
+    main{max-width:1200px;margin:20px auto;padding:0 20px;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+    .card{background:#fff;padding:20px;border-radius:var(--radius);box-shadow:0 4px 16px rgba(0,0,0,.06);transition:.3s;}
+    .card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.08);}
+    h3{margin-top:0;color:var(--wosm-purple);}
+    p{margin:0;}
+    a.button-link{display:inline-block;margin-top:8px;padding:8px 12px;background:var(--wosm-purple);color:#fff;border-radius:6px;text-decoration:none;transition:.3s;}
+    a.button-link:hover{background:var(--wosm-purple-light);}
+    ul{padding-left:20px;margin-top:8px;}
+    ul li{margin-bottom:6px;}
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 id="dashTitle">Dashboard</h1>
+    <button class="logout" onclick="logout()">Logout</button>
+  </header>
+
+  <main>
+    <div class="grid" id="dashboardContent">
+      <!-- Konten dashboard akan diisi lewat JS sesuai role -->
+    </div>
+  </main>
+
+  <script>
+    const role = localStorage.getItem('role');
+
+    if(!role){
+      window.location.href = 'login.html';
+    }
+
+    const dashTitle = document.getElementById('dashTitle');
+    const dashGrid = document.getElementById('dashboardContent');
+
+    function logout(){
+      localStorage.removeItem('role');
+      window.location.href = 'login.html';
+    }
+
+    // Konten dashboard per role
+    const dashboardData = {
+      jurnalistik: [
+        {
+          title:'Berita Terbaru', 
+          desc:'Pantau dan kelola berita, artikel, dan publikasi.', 
+          extra:`<a href="buat_berita.html" class="button-link">Buat Berita Baru</a>`
+        },
+        {
+          title:'Upload Konten', 
+          desc:'Unggah foto, video, dan artikel jurnalistik.'
+        },
+        {
+          title:'Statistik Publikasi', 
+          desc:'Lihat statistik konten yang diterbitkan.'
+        },
+        {
+          title:'Media Sosial', 
+          desc:'Kumpulan username & password media sosial internal.',
+          extra:`<ul>
+            <li>Facebook: <strong>admin_fb</strong> / <strong>fb123</strong></li>
+            <li>Twitter/X: <strong>admin_tw</strong> / <strong>tw123</strong></li>
+            <li>Instagram: <strong>admin_ig</strong> / <strong>ig123</strong></li>
+          </ul>`
+        }
+      ],
+      pengurus_harian: [
+        {title:'Agenda Kegiatan', desc:'Kelola semua kegiatan dan jadwal anggota.'},
+        {title:'Data Anggota', desc:'Tambah, edit, atau hapus anggota aktif.'},
+        {title:'Laporan Harian', desc:'Pantau laporan kegiatan harian anggota.'},
+        {title:'Pengumuman Internal', desc:'Kirim pengumuman ke semua anggota.'}
+      ],
+      pengurus_kwarran: [
+        {title:'Monitoring Kwartir', desc:'Pantau aktivitas pramuka di seluruh kwarran.'},
+        {title:'Laporan Kwarran', desc:'Kumpulkan dan evaluasi laporan kwarran.'},
+        {title:'Pengumuman Resmi', desc:'Kirim pengumuman resmi ke cabang dan ranting.'},
+        {title:'Statistik Anggota', desc:'Lihat statistik anggota di seluruh kwarran.'}
+      ]
+    };
+
+    dashTitle.textContent = `Dashboard ${role.replace('_',' ')}`;
+
+    dashboardData[role].forEach(item=>{
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p>${item.extra || ''}`;
+      dashGrid.appendChild(card);
+    });
+  </script>
+</body>
+</html>

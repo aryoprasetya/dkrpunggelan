@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rekrutmen Anggota — DKR Punggelan</title>
+  <link rel="icon" href="assets/images/logodkr.png" type="image/png">
+
+  <!-- Font Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --wosm-purple: #5b2c83;
+      --wosm-purple-light: #6f3aa6;
+      --bg: #faf9ff;
+      --muted: #6b7280;
+      --radius: 12px;
+      --max-w: 1200px;
+    }
+    *{box-sizing:border-box;scroll-behavior:smooth}
+    body{margin:0;font-family:'Montserrat',sans-serif;background:var(--bg);color:#111;line-height:1.5}
+
+    header{position:sticky;top:0;z-index:1000;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    .nav-container{max-width:var(--max-w);margin:auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{height:50px;width:50px;object-fit:contain}
+    .brand h1{margin:0;font-size:20px;color:var(--wosm-purple)}
+    nav{display:flex;align-items:center;gap:20px}
+    nav a{color:#333;text-decoration:none;padding:8px 0;font-weight:600;position:relative}
+    nav a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--wosm-purple);transition:.3s}
+    nav a:hover::after{width:100%}
+    nav a:hover{color:var(--wosm-purple)}
+
+    .btn-purple {
+      background: var(--wosm-purple);
+      color: #fff !important;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.3s;
+      display: inline-block;
+    }
+    .btn-purple:hover { background: var(--wosm-purple-light); }
+
+    /* Hero */
+    .hero{position:relative;height:400px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:url('assets/images/DSC00145.JPG') center/cover no-repeat}
+    .hero::after{content:"";position:absolute;inset:0;background:rgba(91,44,131,.5)}
+    .hero-content{position:relative;z-index:2;color:#fff;text-align:center;max-width:700px;padding:20px}
+    .hero-content h1{margin:0 0 12px;font-size:34px}
+    .hero-content p{margin:0 0 20px;font-size:16px;color:rgba(255,255,255,.9)}
+
+    main{max-width:var(--max-w);margin:auto;padding:30px 20px}
+    h2{color:var(--wosm-purple);margin-top:0}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+    .card{background:#fff;padding:20px;border-radius:var(--radius);box-shadow:0 4px 16px rgba(0,0,0,.04)}
+
+    ul{margin:0;padding-left:20px}
+    li{margin-bottom:8px}
+
+    .form-box{background:#fff;padding:24px;border-radius:var(--radius);box-shadow:0 4px 16px rgba(0,0,0,.06);text-align:center}
+    .form-box p{margin:0 0 16px;color:var(--muted)}
+
+        /* Footer */
+    footer{background:var(--wosm-purple);color:#fff;margin-top:40px;padding:40px 20px 20px;font-size:14px}
+    footer h4{margin:0 0 10px;font-size:14px;font-weight:700;text-transform:uppercase}
+    footer p{margin:0 0 10px;line-height:1.6}
+    footer a{color:#fff;text-decoration:none}
+    footer a:hover{text-decoration:underline}
+    .footer-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
+    .socials{display:flex;gap:10px;margin-top:10px}
+    .socials a{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:4px;background:rgba(255,255,255,.15);font-size:18px;transition:.3s}
+    .socials a:hover{background:#fff;color:var(--wosm-purple)}
+    footer hr{border:none;border-top:1px solid rgba(255,255,255,.2);margin:20px 0}
+    .credits{text-align:center;font-size:13px;color:rgba(255,255,255,.8)}
+
+    /* Responsive */
+    @media(max-width:800px){
+      .grid{grid-template-columns:1fr}
+      .caption{max-width:90%;font-size:14px}
+    }
+    .btn-purple {
+  background: var(--wosm-purple);
+  color: #fff !important;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.btn-purple:hover {
+  background: var(--wosm-purple-light);
+}
+  </style>
+
+  <!-- Accessibility Button -->
+<div id="accessibility-btn">
+  <i class='bx bx-universal-access'></i>
+</div>
+
+<!-- Accessibility Panel -->
+<div id="accessibility-panel">
+  <h4>Accessibility Tools</h4>
+  <button onclick="changeFontSize(1)"><i class='bx bx-zoom-in'></i> Increase Text</button>
+  <button onclick="changeFontSize(-1)"><i class='bx bx-zoom-out'></i> Decrease Text</button>
+  <button onclick="toggleClass('grayscale')"><i class='bx bx-droplet'></i> Grayscale</button>
+  <button onclick="toggleClass('high-contrast')"><i class='bx bx-adjust'></i> High Contrast</button>
+  <button onclick="toggleClass('negative-contrast')"><i class='bx bx-moon'></i> Negative Contrast</button>
+  <button onclick="toggleClass('light-bg')"><i class='bx bx-sun'></i> Light Background</button>
+  <button onclick="toggleClass('underline-links')"><i class='bx bx-link'></i> Links Underline</button>
+  <button onclick="toggleClass('readable-font')"><i class='bx bx-font'></i> Readable Font</button>
+  <button onclick="resetAccessibility()"><i class='bx bx-reset'></i> Reset</button>
+</div>
+
+<style>
+  #accessibility-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--wosm-purple);
+    color: #fff;
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 3000;
+    box-shadow: 0 4px 12px rgba(0,0,0,.2);
+    transition: .3s;
+  }
+  #accessibility-btn:hover {
+    background: var(--wosm-purple-light);
+  }
+  #accessibility-panel {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.2);
+    padding: 16px;
+    width: 260px;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 3000;
+  }
+  #accessibility-panel h4 {
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: var(--wosm-purple);
+  }
+  #accessibility-panel button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f4f4f4;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: .3s;
+  }
+  #accessibility-panel button:hover {
+    background: var(--wosm-purple);
+    color: #fff;
+  }
+
+  /* Effects */
+  body.grayscale { filter: grayscale(100%) !important; }
+  body.high-contrast { background: #000 !important; color: #fff !important; }
+  body.negative-contrast { background: #000 !important; color: yellow !important; }
+  body.light-bg { background: #fff !important; color: #000 !important; }
+  body.underline-links a { text-decoration: underline !important; }
+  body.readable-font { font-family: 'OpenDyslexic', Arial, sans-serif !important; }
+</style>
+
+<!-- Font untuk Readable -->
+<link href="https://fonts.cdnfonts.com/css/open-dyslexic" rel="stylesheet">
+
+<script>
+  // Toggle Panel
+  document.getElementById("accessibility-btn").addEventListener("click", () => {
+    const panel = document.getElementById("accessibility-panel");
+    panel.style.display = panel.style.display === "flex" ? "none" : "flex";
+  });
+
+  // Font Size
+  let fontSize = 100;
+  function changeFontSize(change) {
+    fontSize += change * 10;
+    document.body.style.fontSize = fontSize + "%";
+  }
+
+  // Toggle Class
+  function toggleClass(cls) {
+    document.body.classList.toggle(cls);
+  }
+
+  // Reset
+  function resetAccessibility() {
+    fontSize = 100;
+    document.body.style.fontSize = "100%";
+    document.body.className = "";
+  }
+</script>
+
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="brand">
+        <img src="assets/images/logodkr.png" alt="Logo DKR">
+        <h1>DKR Punggelan</h1>
+      </div>
+      <div class="menu-toggle" onclick="toggleMenu()"><i class='bx bx-menu'></i></div>
+      <nav id="nav">
+        <a href="index.html">Beranda</a>
+        <div class="dropdown">
+          <a href="javascript:void(0)" onclick="toggleDropdown(this)">Profil <i class='bx bx-chevron-down'></i></a>
+          <div class="dropdown-menu">
+            <a href="about.html">Tentang DKR Punggelan</a>
+            <a href="skkwarran.html">Pengurus Kwarran</a>
+            <a href="profil.html">Profil Anggota DKR</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <a href="javascript:void(0)" onclick="toggleDropdown(this)">Organisasi <i class='bx bx-chevron-down'></i></a>
+          <div class="dropdown-menu">
+            <a href="unduh.html">Media Unduh</a>
+            <a href="404.html">Data Potensi Pramuka Kwarran</a>
+            <a href="rekrutmen.html">Rekrutmen DKR</a>
+          </div>
+        </div>
+        <a href="https://dkrpunggelan.wordpress.com/">Berita</a>
+        <a href="login.html" class="btn-purple">LOGIN</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Rekrutmen Anggota DKR Punggelan</h1>
+      <p>Bergabunglah bersama kami untuk mengembangkan kepemimpinan, keterampilan, dan pengabdian masyarakat.</p>
+      <a href="#daftar" class="btn-purple">Daftar Sekarang</a>
+    </div>
+  </section>
+
+  <main>
+    <section>
+      <h2>Kenapa Bergabung dengan DKR?</h2>
+      <div class="grid">
+        <div class="card">
+          <h3><i class='bx bx-user-voice'></i> Pengembangan Kepemimpinan</h3>
+          <p>Kamu akan dilatih menjadi pemimpin yang tangguh, berani, dan bertanggung jawab dalam organisasi.</p>
+        </div>
+        <div class="card">
+          <h3><i class='bx bx-book-reader'></i> Keterampilan & Pengetahuan</h3>
+          <p>Ikuti pelatihan beragam keterampilan seperti komunikasi, manajemen, hingga teknologi.</p>
+        </div>
+        <div class="card">
+          <h3><i class='bx bx-globe'></i> Pengabdian Masyarakat</h3>
+          <p>Terlibat langsung dalam kegiatan sosial, bakti masyarakat, dan program pembangunan desa.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top:40px">
+      <h2>Syarat Pendaftaran</h2>
+      <div class="card">
+        <ul>
+          <li>Anggota Pramuka Penegak/Pandega aktif di Gugusdepan se-Kecamatan Punggelan.</li>
+          <li>Berusia 16–23 tahun.</li>
+          <li>Siap mengikuti seluruh rangkaian seleksi dan pelatihan.</li>
+          <li>Mendapat rekomendasi dari Pembina Gugusdepan.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section style="margin-top:40px" id="daftar">
+      <h2>Pendaftaran Online</h2>
+      <div class="form-box">
+        <p>Silakan klik tombol di bawah untuk mengisi formulir pendaftaran resmi.</p>
+        <a href="https://forms.gle/your-form-link" target="_blank" class="btn-purple">
+          <i class='bx bx-edit'></i> Isi Formulir Pendaftaran
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid" style="gap:40px">
+      <div>
+        <h4>DKR PUNGGELAN</h4>
+        <p>Dewan Kerja Ranting Punggelan adalah wadah pengembangan kepemimpinan pramuka penegak dan pandega di Kecamatan Punggelan.</p>
+        <p><em>"Mengabdi dengan Kreasi, Menginspirasi dengan Aksi"</em></p>
+      </div>
+      <div>
+        <h4>SEKRETARIAT</h4>
+        <p>Dindikpora Kec. Punggelan<br>Jl. Raya Pasar Manis, Banjarnegara, Jateng 53462</p>
+        <p>Email: <a href="mailto:dewankerjarantingkecpunggelan@gmail.com">dewankerjarantingkecpunggelan@gmail.com</a></p>
+      </div>
+      <div>
+        <h4>LINK ORGANISASI</h4>
+        <ul style="list-style:none;padding:0;margin:0;line-height:1.8">
+          <li>
+            <a href="https://pramukabanjarnegara.or.id" target="_blank">
+              Kwarcab Banjarnegara <i class='bx bx-link-external'></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://pramukajateng.or.id" target="_blank">
+              Kwarda Jawa Tengah <i class='bx bx-link-external'></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://pramuka.or.id" target="_blank">
+              Kwartir Nasional <i class='bx bx-link-external'></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4>MEDIA SOSIAL</h4>
+        <div class="socials">
+          <a href="https://facebook.com/DkrPunggelan" target="_blank"><i class='bx bxl-facebook'></i></a>
+          <a href="https://x.com/dkr__punggelan" target="_blank"><i class='bx bxl-twitter'></i></a>
+          <a href="https://youtube.com" target="_blank"><i class='bx bxl-youtube'></i></a>
+          <a href="https://instagram.com/dkr__punggelan" target="_blank"><i class='bx bxl-instagram'></i></a>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="credits">© 2025 Dewan Kerja Ranting Punggelan. Semua Hak Dilindungi.</div>
+  </footer>
+</body>
+</html>
