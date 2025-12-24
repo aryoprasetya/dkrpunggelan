@@ -732,7 +732,6 @@
             <a href="unduh.html">Media Unduh</a>
             <a href="404.html">Data Potensi Pramuka Kwarran</a>
             <a href="404.html">Rekrutmen DKR</a>
-            <a href="jadwal.html">Agenda Kegiatan</a>
           </div>
         </div>
         <a href="https://dkrpunggelan.wordpress.com/">Berita</a>
@@ -853,6 +852,97 @@
     height:420px;
   }
 }
+/* ===== SECTION GUGUS DEPAN ===== */
+.gudep-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:16px;
+}
+
+.gudep-item{
+  background:#fff;
+  border-left:6px solid var(--wosm-purple);
+  border-radius:10px;
+  padding:14px;
+  box-shadow:0 4px 12px rgba(0,0,0,.05);
+  transition:.3s;
+}
+
+.gudep-item:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 22px rgba(0,0,0,.12);
+}
+
+.gudep-item h4{
+  margin:0 0 6px;
+  font-size:16px;
+  color:#222;
+}
+
+.gudep-item p{
+  font-size:13px;
+  color:#666;
+  margin:0 0 8px;
+}
+
+.gudep-item a{
+  font-size:13px;
+  font-weight:600;
+  color:var(--wosm-purple);
+  text-decoration:none;
+}
+/* ===== GUGUS DEPAN DENGAN THUMBNAIL ===== */
+.gudep-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:18px;
+}
+
+.gudep-item{
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+  transition:.3s;
+  display:flex;
+  flex-direction:column;
+}
+
+.gudep-item:hover{
+  transform:translateY(-6px);
+  box-shadow:0 14px 28px rgba(0,0,0,.15);
+}
+
+.gudep-thumb{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  background:#eee;
+}
+
+.gudep-body{
+  padding:14px;
+}
+
+.gudep-body h4{
+  margin:0 0 6px;
+  font-size:16px;
+  color:#222;
+  line-height:1.4;
+}
+
+.gudep-body p{
+  font-size:13px;
+  color:#666;
+  margin:0 0 10px;
+}
+
+.gudep-body a{
+  font-size:13px;
+  font-weight:600;
+  color:var(--wosm-purple);
+  text-decoration:none;
+}
 
 </style>
 
@@ -944,6 +1034,28 @@
       <a href="https://dkrpunggelan.wordpress.com" target="_blank"
          style="color:var(--wosm-purple); font-weight:600; text-decoration:none;">
          Baca semua berita →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BERITA GUGUS DEPAN ===== -->
+<section id="gudep-section" style="margin-top:30px">
+  <div class="card" style="background:#f7f8fc">
+    <h3>Info Gugus Depan</h3>
+    <p style="font-size:13px;color:#666;margin-top:-6px">
+      Update kegiatan dan informasi terbaru dari Gugus Depan di wilayah Kwartir Ranting Punggelan
+    </p>
+
+    <div id="gudep-posts" class="gudep-grid">
+      <p style="color:#777">Memuat data Gugus Depan...</p>
+    </div>
+
+    <div style="margin-top:14px;text-align:right">
+      <a href="https://dkrpunggelan.wordpress.com/category/gudep/"
+         target="_blank"
+         style="color:var(--wosm-purple);font-weight:600;text-decoration:none">
+        Lihat semua info Gugus Depan →
       </a>
     </div>
   </div>
@@ -1420,15 +1532,53 @@ window.addEventListener("scroll", ()=>{
   }
 });
 </script>
-<script>
-const devSlider = document.getElementById("devSlider");
 
-function slideDev(direction){
-  const cardWidth = devSlider.querySelector(".dev-card").offsetWidth + 16;
-  devSlider.scrollLeft += direction * cardWidth;
+<script>
+const gudepContainer = document.getElementById("gudep-posts");
+
+async function loadGudepNews() {
+  try {
+    const res = await fetch(
+      "https://api.rss2json.com/v1/api.json?rss_url=https://dkrpunggelan.wordpress.com/category/gudep/feed/"
+    );
+    const data = await res.json();
+
+    gudepContainer.innerHTML = "";
+
+    data.items.slice(0,6).forEach(post => {
+      let img = post.thumbnail;
+
+      // fallback kalau thumbnail kosong
+      if (!img && post.content) {
+        const match = post.content.match(/<img[^>]+src="([^">]+)"/);
+        if (match) img = match[1];
+      }
+
+      if (!img) {
+        img = "https://via.placeholder.com/400x250?text=Gugus+Depan";
+      }
+
+      const excerpt = post.description.replace(/(<([^>]+)>)/gi, "").slice(0, 120);
+
+      gudepContainer.innerHTML += `
+        <div class="gudep-item">
+          <img src="${img}" class="gudep-thumb" alt="${post.title}">
+          <div class="gudep-body">
+            <h4>${post.title}</h4>
+            <p>${excerpt}...</p>
+            <a href="${post.link}" target="_blank">Baca selengkapnya →</a>
+          </div>
+        </div>
+      `;
+    });
+
+  } catch (err) {
+    gudepContainer.innerHTML = "<p style='color:red'>Gagal memuat data Gugus Depan.</p>";
+  }
 }
+
+loadGudepNews();
 </script>
 
 </body>
 </html>
-
