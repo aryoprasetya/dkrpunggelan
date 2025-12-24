@@ -272,6 +272,134 @@
   from{opacity:0;transform:translateY(20px)}
   to{opacity:1;transform:translateY(0)}
 }
+/* ===== TIM PENGEMBANG WEBSITE ===== */
+.dev-section{
+  max-width:1200px;
+  margin:40px auto 10px;
+  padding:24px 20px;
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 6px 20px rgba(0,0,0,.06);
+  text-align:center;
+}
+
+.dev-section h3{
+  color:var(--wosm-purple);
+  margin-bottom:8px;
+}
+
+.dev-desc{
+  font-size:13px;
+  color:#6b7280;
+  max-width:720px;
+  margin:0 auto 24px;
+}
+
+.dev-slider-wrapper{
+  position:relative;
+  display:flex;
+  align-items:center;
+}
+
+.dev-slider{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;          /* ⬅️ PENTING */
+  scroll-behavior:smooth;
+  padding-bottom:6px;
+}
+
+.dev-slider::-webkit-scrollbar{
+  display:none;             /* sembunyikan scrollbar */
+}
+
+.dev-card{
+  min-width:260px;
+  background:#faf9ff;
+  border-radius:14px;
+  padding:16px;
+  text-align:center;
+  border:1.5px solid rgba(91,44,131,.25);
+}
+
+.dev-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 10px 26px rgba(91,44,131,.18);
+}
+
+.dev-card img{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:10px;
+  border:3px solid var(--wosm-purple);
+}
+
+.dev-card h4{
+  margin:6px 0 2px;
+  font-size:15px;
+}
+
+.dev-card span{
+  font-size:12px;
+  color:var(--wosm-purple);
+  font-weight:600;
+}
+
+.dev-card p{
+  font-size:13px;
+  color:#555;
+  margin-top:6px;
+}
+
+.dev-nav{
+  background: var(--wosm-purple);
+  border: none;
+  color: #fff;
+
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+
+  border-radius: 50%;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: .3s;
+}
+
+.dev-nav i{
+  font-size: 22px;
+  line-height: 1;
+}
+
+.dev-nav:hover{
+  background:var(--wosm-purple-light);
+}
+
+.dev-nav.prev{margin-right:10px}
+.dev-nav.next{margin-left:10px}
+
+@media(max-width:600px){
+  .dev-slider-wrapper{
+    padding:0 4px;
+  }
+
+  .dev-card{
+    min-width:85%;          /* ⬅️ card hampir penuh layar */
+    flex-shrink:0;
+  }
+
+  .dev-nav{
+    display:none;           /* ⬅️ panah disembunyikan di HP */
+  }
+}
   </style>
 
   <!-- Accessibility Button -->
@@ -504,7 +632,49 @@
   color:#6b7280;
   line-height:1.6;
 }
+.ig-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:12px;
+}
 
+.ig-post{
+  position:relative;
+  overflow:hidden;
+  border-radius:10px;
+  background:#000;
+}
+
+.ig-post img{
+  width:100%;
+  height:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  transition:.4s;
+}
+
+.ig-post:hover img{
+  transform:scale(1.08);
+  opacity:.85;
+}
+
+.ig-post::after{
+  content:"";
+  font-family:boxicons;
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:36px;
+  color:#fff;
+  opacity:0;
+  transition:.3s;
+}
+
+.ig-post:hover::after{
+  opacity:1;
+}
 </style>
 
 <!-- Font untuk Readable -->
@@ -665,6 +835,23 @@
   font-size:14px;
   color:#555;
 }
+.ig-iframe-wrapper{
+  width:100%;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(0,0,0,.08);
+}
+
+.ig-iframe-wrapper iframe{
+  width:100%;
+  height:480px;
+  border:0;
+}
+@media(max-width:600px){
+  .ig-iframe-wrapper iframe{
+    height:420px;
+  }
+}
 
 </style>
 
@@ -739,7 +926,6 @@
   <span class="counter" data-target="1676">0</span>
   <p>Pramuka Garuda</p>
   <p class="anggota-note" style="font-size:12px; margin-top:6px;">
-    *Angka ini merupakan gabungan dari anggota Pramuka Siaga, Penggalang, dan Penegak yang telah meraih tanda Garuda.
   </p>
 </div>
   </div>
@@ -751,23 +937,23 @@
         <h3>Agenda Kegiatan</h3>
         <div class="agenda-list">
   <div class="agenda-item" onclick="openEvent(
-    'Pelantikan Pramuka Garuda Siaga',
-    '2025',
-    '2025',
-    'Kwarran Punggelan',
-    'Pelantikan Pramuka Garuda Siaga',
-    'assets/images/garuda.png')">
-    <div class="when"><br><small>2025</small></div>
-    <div><h4>Pelantikan Pramuka Garuda Siaga</h4><p>Kwarran Punggelan</p></div>
+    'Jota Joti Kwarcab Banjarnegara 2025',
+    '2025-10-17T08:00',
+    '2025-10-19T15:00',
+    'Sanggar Pramuka Kwartir Cabang Banjarnegara',
+    'Jambore On The Air - Jambore On The Internet Kwartir Cabang Banjarnegara Tahun 2025',
+    'assets/images/jj.webp')">
+    <div class="when">17 Okt-19 Okt<br><small>2025</small></div>
+    <div><h4>Jota Joti Kwarcab Banjarnegara 2025</h4><p>Sanggar Pramuka Kwartir Cabang Banjarnegara — 08.00–15.00</p></div>
   </div>
   <div class="agenda-item" onclick="openEvent(
     'Rekrutmen Anggota Baru DKR Punggelan',
-    '2025',
-    '2025',
+    '2025-9-20T00:00',
+    '2025-10-5T23:59',
     'Online',
     'Rekrutmen Anggota Baru Dewan Kerja Ranting Punggelan Masa Bhakti 2026-2028. Untuk daftar, scan kode qr atau kunjungi link dipamflet',
     'assets/images/rekdkr.png')">
-    <div class="when"><br><small>2025</small></div>
+    <div class="when">20 Sep-5 Okt<br><small>2025</small></div>
     <div><h4>Rekrutmen Anggota Baru DKR Punggelan</h4><p>Online — 00.00–23.59</p></div>
   </div>
   
@@ -803,6 +989,32 @@
       <a href="https://dkrpunggelan.wordpress.com" target="_blank"
          style="color:var(--wosm-purple); font-weight:600; text-decoration:none;">
          Baca semua berita →
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="instagram-feed" style="margin-top:20px">
+  <div class="card">
+    <h3 style="display:flex;align-items:center;gap:8px">
+      <i class='bx bxl-instagram' style="color:#e1306c"></i>
+      Instagram Terbaru @dkr__punggelan
+    </h3>
+
+    <div class="ig-iframe-wrapper">
+      <iframe
+        src="https://www.instagram.com/dkr__punggelan/embed"
+        allowtransparency="true"
+        scrolling="no"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+      ></iframe>
+    </div>
+
+    <div style="margin-top:12px;text-align:right">
+      <a href="https://instagram.com/dkr__punggelan" target="_blank"
+         style="color:var(--wosm-purple);font-weight:600;text-decoration:none">
+        Kunjungi Instagram →
       </a>
     </div>
   </div>
@@ -859,7 +1071,7 @@
   ">
     <i class='bx bxl-youtube' style="color:#ff0000;font-size:16px"></i>
     Kredit video:
-    <a href="https://www.youtube.com/@sdnegeri1jembangan"
+    <a href="https://www.youtube.com/@SDN1Jembangan"
        target="_blank"
        style="color:var(--wosm-purple);text-decoration:none;font-weight:600">
        SD Negeri 1 Jembangan
@@ -936,6 +1148,56 @@
   </a>
 </section>
 
+<!-- ===== TIM PENGEMBANG WEBSITE ===== -->
+<section class="dev-section">
+  <h3>Tim Pengembang Website</h3>
+  <p class="dev-desc">
+    Website ini dikembangkan dan dikelola oleh tim kolaboratif
+    untuk mendukung transparansi informasi DKR Punggelan.
+  </p>
+
+  <div class="dev-slider-wrapper">
+    <button class="dev-nav prev" onclick="slideDev(-1)">
+      <i class='bx bx-chevron-left'></i>
+    </button>
+
+    <div class="dev-slider" id="devSlider">
+      <!-- 2 -->
+      <div class="dev-card">
+        <img src="assets/images/aryo.jpg" alt="Aryo Yulio Prasetya">
+        <h4>Aryo Yulio Prasetya</h4>
+      </div>
+
+            <!-- 1 -->
+      <div class="dev-card">
+        <img src="assets/images/P_49_20230105095623.jpg" alt="Humas Kwarran">
+        <h4>Humas Kwarran</h4>
+      </div>
+      
+      <!-- 3 -->
+      <div class="dev-card">
+        <img src="assets/images/pcewe.jpg" alt="Multa Rahma Deswita">
+        <h4>Multa Rahma Deswita</h4>
+      </div>
+
+      <!-- 4 -->
+      <div class="dev-card">
+        <img src="assets/images/jurnalistik.png" alt="Unit Jurnalistik">
+        <h4>Unit Jurnalistik</h4>
+      </div>
+
+      <!-- 5 -->
+      <div class="dev-card">
+        <img src="assets/images/P_49_20230105095623.jpg" alt="Pihak Ketiga">
+        <h4>Pihak Ketiga</h4>
+      </div>
+    </div>
+
+    <button class="dev-nav next" onclick="slideDev(1)">
+      <i class='bx bx-chevron-right'></i>
+    </button>
+  </div>
+</section>
 
   <footer>
     <div class="footer-grid" style="gap:40px">
@@ -1203,10 +1465,14 @@ window.addEventListener("scroll", ()=>{
   }
 });
 </script>
+<script>
+const devSlider = document.getElementById("devSlider");
+
+function slideDev(direction){
+  const cardWidth = devSlider.querySelector(".dev-card").offsetWidth + 16;
+  devSlider.scrollLeft += direction * cardWidth;
+}
+</script>
 
 </body>
 </html>
-
-
-
-
