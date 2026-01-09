@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Profil Anggota DKR Punggelan 2026/2028</title>
+  <title>Profil Anggota DKR Punggelan 2023/2026</title>
   <link rel="icon" href="assets/images/logodkr.png" type="image/png">
 
   <!-- Font Quantico -->
@@ -245,6 +245,95 @@
   body.light-bg { background: #fff !important; color: #000 !important; }
   body.underline-links a { text-decoration: underline !important; }
   body.readable-font { font-family: 'OpenDyslexic', Arial, sans-serif !important; }
+
+  /* Avatar dengan emblem */
+.avatar-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar-wrap .paw-badge {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  background: var(--wosm-purple);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 999px;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.2);
+  border: 2px solid #fff;
+}
+
+/* ================================
+   LEADER CARD (KETUA & WAKIL)
+================================ */
+
+/* Card khusus pimpinan */
+.leader-card {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff, #f5f0ff);
+  border: 2px solid rgba(91,44,131,.35);
+  box-shadow:
+    0 10px 30px rgba(91,44,131,.25),
+    inset 0 0 0 1px rgba(255,255,255,.6);
+}
+
+/* Glow lembut */
+.leader-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    rgba(91,44,131,.6),
+    rgba(201,162,39,.6)
+  );
+  opacity: .25;
+  z-index: -1;
+  filter: blur(12px);
+}
+
+/* Avatar pimpinan */
+.leader-avatar img {
+  border: 4px solid #c9a227; /* emas */
+  padding: 4px;
+  background: #fff;
+}
+
+/* Ring animasi halus */
+.leader-avatar::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px dashed rgba(201,162,39,.6);
+  animation: spin 18s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Badge jabatan pimpinan */
+.leader-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #5b2c83, #c9a227);
+  color: #fff;
+  letter-spacing: .5px;
+}
+
 </style>
 
 <!-- Font untuk Readable -->
@@ -317,51 +406,62 @@
   <div class="container">
     <h2 class="section-title">
       Profil Anggota DKR Punggelan <br>
-      <span class="periode">Masa Bhakti 2026/2028</span>
+      <span class="periode">Masa Bhakti 2023/2026</span>
     </h2>
 
     <!-- Pengurus Harian -->
     <h3 class="sub-title">Pimpinan</h3>
 <div class="anggota-grid">
 
-  <div class="anggota-card">
+<div class="anggota-card leader-card">
+  <div class="avatar-wrap leader-avatar">
     <img src="assets/images/pcewe.jpg">
-    <h4>Salsa Aprilia Putri Utami</h4>
-    <p class="jabatan">Ketua</p>
   </div>
+  <h4>Salsa Aprilia Putri Utami</h4>
+  <span class="leader-badge">
+    <i class='bx bxs-crown'></i> KETUA
+  </span>
+</div>
 
-  <div class="anggota-card">
+<div class="anggota-card leader-card">
+  <div class="avatar-wrap leader-avatar">
     <img src="assets/images/P_49_20230105095623.jpg">
-    <h4>Aryo Yulio Prasetya</h4>
-    <p class="jabatan">Wakil Ketua</p>
   </div>
+  <h4>Aryo Yulio Prasetya</h4>
+  <span class="leader-badge">
+    <i class='bx bxs-star'></i> WAKIL KETUA
+  </span>
+</div>
+</div>
 
+    <!-- Pengurus Harian -->
+    <h3 class="sub-title">Pengurus Harian</h3>
+<div class="anggota-grid">
   <div class="anggota-card">
     <img src="assets/images/pcewe.jpg">
     <h4>Fini Fiduriyati</h4>
-    <p class="jabatan">Sekretaris</p>
+    <p class="jabatan">Sekretaris I</p>
   </div>
 
   <div class="anggota-card">
     <img src="assets/images/pcewe.jpg">
     <h4>Sulistiyani</h4>
-    <p class="jabatan">Sekretaris</p>
+    <p class="jabatan">Sekretaris II</p>
   </div>
 
   <div class="anggota-card">
     <img src="assets/images/pcewe.jpg">
     <h4>Mutiara Zahra</h4>
-    <p class="jabatan">Bendahara</p>
+    <p class="jabatan">Bendahara I</p>
   </div>
 
   <div class="anggota-card">
     <img src="assets/images/pcewe.jpg">
     <h4>Asih Setianingsih</h4>
-    <p class="jabatan">Bendahara</p>
+    <p class="jabatan">Bendahara II</p>
   </div>
 
 </div>
-
 
     <!-- Bidang Jurnalistik -->
     <h3 class="sub-title">Seksi Bidang Kajian Kepramukaan & Teknik Kepramukaan</h3>
@@ -384,6 +484,15 @@
     <h4>Dwiana Amalia</h4>
     <p class="jabatan">Anggota</p>
   </div>
+
+    <div class="anggota-card">
+  <div class="avatar-wrap">
+    <img src="assets/images/P_49_20230105095623.jpg">
+    <span class="paw-badge">PAW</span>
+  </div>
+  <h4>Johan Agustin Pamungkas</h4>
+  <p class="jabatan">Anggota</p>
+</div>
 
 </div>
 
@@ -409,6 +518,15 @@
     <p class="jabatan">Anggota</p>
   </div>
 
+    <div class="anggota-card">
+  <div class="avatar-wrap">
+    <img src="assets/images/P_49_20230105095623.jpg">
+    <span class="paw-badge">PAW</span>
+  </div>
+  <h4>Aldi Ansah Rizki Afril Lianto All Zafir Narendra</h4>
+  <p class="jabatan">Anggota</p>
+</div>
+
 </div>
 
     <!-- Bidang Jurnalistik -->
@@ -433,6 +551,14 @@
     <p class="jabatan">Anggota</p>
   </div>
 
+  <div class="anggota-card">
+  <div class="avatar-wrap">
+    <img src="assets/images/pcewe.jpg">
+    <span class="paw-badge">PAW</span>
+  </div>
+  <h4>Riana</h4>
+  <p class="jabatan">Anggota</p>
+</div>
 </div>
 
 <!-- Bidang Kepramukaan -->
@@ -493,6 +619,14 @@
     <p class="jabatan">Anggota</p>
   </div>
 
+    <div class="anggota-card">
+  <div class="avatar-wrap">
+    <img src="assets/images/P_49_20230105095623.jpg">
+    <span class="paw-badge">PAW</span>
+  </div>
+  <h4>Andika Julianto</h4>
+  <p class="jabatan">Anggota</p>
+</div>
 </div>
   </div>
 </section>
@@ -720,5 +854,6 @@
 </script>
 </body>
 </html>
+
 
 
