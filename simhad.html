@@ -230,6 +230,195 @@ footer{
   </style>
 </head>
 <body data-theme="light">
+<div id="authScreen" style="
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+">
+
+  <div style="
+    background:#ffffff;
+    padding:32px 28px;
+    border-radius:16px;
+    max-width:360px;
+    width:100%;
+    box-shadow:0 25px 60px rgba(0,0,0,.35);
+    text-align:center;
+    animation:fadeIn .5s ease;
+  ">
+
+    <!-- LOGO -->
+    <img src="assets/images/logo.png" alt="DKR Punggelan"
+      style="height:72px;margin-bottom:14px">
+
+<h3 style="
+  margin:0;
+  font-size:18px;
+  color:#1e293b;
+  font-weight:700;
+  letter-spacing:.3px;
+  display:block;
+  text-align:center;
+">
+  AKSES SIMHAD
+</h3>
+
+    <p style="
+      font-size:13px;
+      color:#6b7280;
+      margin:6px 0 18px;
+      line-height:1.4;
+    ">
+      Sistem Informasi Manajemen Kehadiran<br>
+      <strong>DKR Punggelan</strong>
+    </p>
+
+    <input id="tokenInput" type="password" placeholder="Masukkan kode akses"
+      style="
+        width:100%;
+        padding:12px 14px;
+        border-radius:10px;
+        border:1px solid #d1d5db;
+        font-size:14px;
+        outline:none;
+      "
+      onfocus="this.style.borderColor='#6366f1'"
+      onblur="this.style.borderColor='#d1d5db'"
+    >
+
+    <button onclick="checkToken()" style="
+      width:100%;
+      margin-top:16px;
+      padding:12px;
+      border:none;
+      border-radius:10px;
+      background:#4f46e5;
+      color:#fff;
+      font-weight:600;
+      font-size:15px;
+      cursor:pointer;
+    ">
+      Masuk Sistem
+    </button>
+
+    <div id="authError" style="
+      display:none;
+      margin-top:12px;
+      font-size:13px;
+      color:#dc2626;
+    ">
+      Kode akses tidak valid
+    </div>
+
+    <div id="authTime" style="
+      margin-top:18px;
+      font-size:12px;
+      color:#374151;
+    "></div>
+
+    <div style="
+      margin-top:10px;
+      font-size:11px;
+      color:#9ca3af;
+    ">
+      © 2026 DKR Punggelan
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:none}
+}
+</style>
+
+<script>
+/* ===== KUNCI AKSES (HASH) ===== */
+const _KUNCI_HASH = "ab509099f76158326b98727425675b11e6ea1db86aff64f51fdee015e7497ebc";
+
+/* ===== HASH FUNCTION ===== */
+async function _hash(t){
+  const e = new TextEncoder().encode(t);
+  const r = await crypto.subtle.digest("SHA-256", e);
+  return Array.from(new Uint8Array(r))
+    .map(b => b.toString(16).padStart(2,"0"))
+    .join("");
+}
+
+/* ===== CEK TOKEN ===== */
+async function checkToken(){
+  const input = document.getElementById("tokenInput");
+  const error = document.getElementById("authError");
+  const token = input.value.trim();
+
+  if(!token){
+    error.textContent = "Kode akses wajib diisi";
+    error.style.display = "block";
+    return;
+  }
+
+  if(await _hash(token) === _KUNCI_HASH){
+    sessionStorage.setItem("simhad_auth","ok");
+    document.getElementById("authScreen").style.display="none";
+  }else{
+    error.textContent = "Kode akses tidak valid";
+    error.style.display = "block";
+    input.value="";
+  }
+}
+
+/* ===== SESSION SEKALI AKSES ===== */
+if(sessionStorage.getItem("simhad_auth")==="ok"){
+  document.getElementById("authScreen").style.display="none";
+}
+
+/* ===== ANTI INSPECT DASAR ===== */
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+document.onkeydown = e => {
+  if(
+    e.keyCode === 123 || // F12
+    (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key.toUpperCase())) ||
+    (e.ctrlKey && e.key.toUpperCase() === "U")
+  ){
+    sessionStorage.clear();
+    location.reload();
+    return false;
+  }
+};
+</script>
+
+<script>
+/* ===== DETEKSI INSPECT (REAL WORKING) + PERINGATAN LUCU ===== */
+let _udahKena = false;
+
+setInterval(() => {
+  const threshold = 160;
+
+  const devtoolsTerbuka =
+    window.outerWidth - window.innerWidth > threshold ||
+    window.outerHeight - window.innerHeight > threshold;
+
+  if (devtoolsTerbuka && !_udahKena) {
+    _udahKena = true;
+
+    alert(
+      "🕵️‍♂️ WOY!\n\n" +
+      "Inspect detected 😆\n\n" +
+      "Ini bukan lomba ngulik yaa.\n" +
+      "SIMHAD lagi sensitif 🙏"
+    );
+
+    sessionStorage.clear();
+    location.reload();
+  }
+}, 800);
+</script>
 
 <header>
   <div class="brand">
